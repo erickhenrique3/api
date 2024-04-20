@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('moto')->controller(MotoController::class)->group(function () {
     Route::post('/', 'create');
     Route::get('/', 'index');
+    Route::get('/{moto}', 'show');
     Route::put('/{moto}', 'update');
     Route::delete('/{moto}', 'destroy');
 });

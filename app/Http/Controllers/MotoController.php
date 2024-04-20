@@ -51,6 +51,7 @@ class MotoController extends Controller
     public function show(Moto $moto)
     {
         //
+        return response()->json(($moto));
     }
 
     /**
@@ -75,5 +76,7 @@ class MotoController extends Controller
     public function destroy(Moto $moto)
     {
         //
+        $moto->delete();
+        return response()->json(['message' => 'Moto excluida com sucesso!'], 200);
     }
 }
