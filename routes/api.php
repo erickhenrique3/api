@@ -19,7 +19,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('moto')->controller(MotoController::class)->group(function(){
-     Route::post('/','create');
-     Route::get('/', 'index');
+Route::prefix('moto')->controller(MotoController::class)->group(function () {
+    Route::post('/', 'create');
+    Route::get('/', 'index');
+    Route::put('/{moto}', 'update');
+    Route::delete('/{moto}', 'destroy');
 });
