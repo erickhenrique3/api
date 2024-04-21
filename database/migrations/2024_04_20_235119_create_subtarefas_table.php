@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('motos', function (Blueprint $table) {
+        Schema::create('subtarefas', function (Blueprint $table) {
             $table->id();
-            $table->string('name',15);
-            $table->decimal('amount', 8,2);
-            $table->longText('description')->nullable();
+            $table->string('title');
+            $table->foreignId('tarefas_id')->constrained('Tarefas');
+            $table->longText('description');
+            $table->enum('status', ['pending','completed']);
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('motos');
+        Schema::dropIfExists('subtarefas');
     }
 };

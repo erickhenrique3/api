@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MotoController;
+use App\Http\Controllers\TarefasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('moto')->controller(MotoController::class)->group(function () {
+Route::prefix('Tarefas')->controller(TarefasController::class)->group(function () {
     Route::post('/', 'create');
     Route::get('/', 'index');
-    Route::get('/{moto}', 'show');
-    Route::put('/{moto}', 'update');
-    Route::delete('/{moto}', 'destroy');
+    Route::get('/{tarefas}', 'show');
+    Route::put('/{tarefas}', 'update');
+    Route::delete('/{tarefas}', 'destroy');
 });

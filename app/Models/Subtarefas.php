@@ -5,13 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Moto extends Model
+class Subtarefas extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name',
-        'amount',
+        'title',
         'description',
+        'status'
+
     ];
+
+
+
+    public function tarefas()
+    {
+        return $this->belongsTo(Tarefas::class);
+    }
 }
