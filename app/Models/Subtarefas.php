@@ -10,7 +10,7 @@ class Subtarefas extends Model
     use HasFactory;
     protected $fillable = [
         'title',
-        'tarefas_id',
+        'tarefa_id',
         'description',
         'status'
 
@@ -18,7 +18,7 @@ class Subtarefas extends Model
 
 
 
-    public function subtarefa()
+    public function subtarefas()
     {
         return $this->hasMany(Subtarefas::class);
     }
