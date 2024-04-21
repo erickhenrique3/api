@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('subtarefas', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreignId('tarefa_id')->constrained('Tarefas');
+            $table->foreignId('tarefa_id')->constrained('tarefas');
             $table->longText('description');
             $table->enum('status', ['pending','completed']);
             $table->timestamps();
