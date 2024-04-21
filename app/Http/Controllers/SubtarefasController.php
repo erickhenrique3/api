@@ -22,7 +22,7 @@ class SubtarefasController extends Controller
         //
         $subtarefas = Subtarefas::create([
             'title' => $request->input('title'),
-            // 'tarefa_id' => $request->input('tarefa_id'),
+            'tarefa_id' => $request->input('tarefa_id'),
             'description' => $request->input('description'),
             'status' => $request->input('status')
 
