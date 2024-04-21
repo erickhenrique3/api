@@ -63,6 +63,6 @@ class SubtarefasController extends Controller
     {
         //
         $subtarefas->delete();
-        return response()->json(['message' => 'Tarefa excluida com sucesso!'], 200);
+        return response()->json(['message' => 'Subtarefa excluida com sucesso!'], 200);
     }
 }

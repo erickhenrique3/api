@@ -11,13 +11,14 @@ class Tarefas extends Model
     use HasFactory;
     protected $fillable = [
         'title',
+        
         'description',
         'due_date',
         'status'
         
     ];
 
-    public function subtarefas(){
-        return $this->hasMany(Subtarefas::class);
+    public function tarefa(){
+        return $this->belongsTo(Tarefas::class);
     }
 }
