@@ -50,6 +50,7 @@ class TarefasController extends Controller
      */
     public function show(Tarefas $tarefas)
     {
+        // $tarefas =Tarefas::with('subtarefas')->find($id);
         return response()->json(($tarefas));
     }
 

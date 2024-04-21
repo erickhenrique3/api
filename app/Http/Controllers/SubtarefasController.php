@@ -54,7 +54,23 @@ class SubtarefasController extends Controller
      */
     public function update(Request $request, Subtarefas $subtarefas)
     {
-        //
+        $request->validate(
+            [
+                'title' => 'required|string',
+                'description' => 'nullable|string',
+                'tarefa_id' => 'numeric',
+                'status' => 'nullable|string| in:pending,completed',
+
+            ],
+        );
+
+
+        $subtarefas->update($request->all());
+
+        return response()->json([
+            'message' => 'tarefa atualizada com sucesso',
+            'subtarefa' => $subtarefas
+        ], );
     }
 
     /**
