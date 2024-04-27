@@ -14,7 +14,7 @@ class Tarefas extends Model
 
         'description',
         'due_date',
-        'status'
+        'status |nullable'
 
     ];
 
