@@ -18,8 +18,8 @@ class Subtarefas extends Model
 
 
 
-    public function subtarefas()
+    public function tarefas()
     {
-        return $this->hasMany(Subtarefas::class);
+        return $this->belongsTo(Tarefas::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tarefas;
+use App\models\Subtarefas;
 use Illuminate\Http\Request;
 
 class TarefasController extends Controller
@@ -13,7 +14,7 @@ class TarefasController extends Controller
     public function index(Request $request)
     {
         //
-        return response()->json(Tarefas::paginate($request->input('per_page') ?? 15));
+        return response()->json(Tarefas::with("subtarefas")->paginate($request->input('per_page') ?? 15 ));
     }
 
     /**

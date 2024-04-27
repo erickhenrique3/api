@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subtarefas;
+use App\Models\Tarefas;
 use Illuminate\Http\Request;
 
 class SubtarefasController extends Controller
