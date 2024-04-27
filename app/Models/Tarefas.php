@@ -20,7 +20,7 @@ class Tarefas extends Model
 
     public function subtarefas()
     {
-        return $this->hasMany(Subtarefas::class, 'tarefa_id');
+        return $this->hasMany(Subtarefas::class, 'task_id');
         
     }
 

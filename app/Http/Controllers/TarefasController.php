@@ -49,10 +49,11 @@ class TarefasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tarefas $tarefas)
+    public function show($id)
     {
-        // $tarefas =Tarefas::with('subtarefas')->find($id);
-        return response()->json(($tarefas));
+        $tarefas = Tarefas::findOrFail($id);
+        // $tarefas =Tarefas::with('subtarefas')->find($tarefas);
+        return response()->json($tarefas);
     }
 
     /**

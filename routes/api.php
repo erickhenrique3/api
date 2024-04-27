@@ -22,18 +22,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('tarefas')->controller(TarefasController::class)->group(function () {
+Route::prefix('tasks')->controller(TarefasController::class)->group(function () {
     Route::post('/', 'create');
     Route::get('/', 'index');
-    Route::get('/{tarefas}', 'show');
-    Route::put('/{tarefas}', 'update');
-    Route::delete('/{tarefas}', 'destroy');
+    Route::get('/{tasks}', 'show');
+    Route::put('/{tasks}', 'update');
+    Route::delete('/{tasks}', 'destroy');
 });
 
-Route::prefix('subtarefas')->controller(SubtarefasController::class)->group(function (){
+Route::prefix('subtasks')->controller(SubtarefasController::class)->group(function (){
     Route::post('/', 'create');
     Route::get('/', 'index');
-    Route::get('/{subtarefas}', 'show');
-    Route::put('/{subtarefas}', 'update');
-    Route::delete('/{subtarefas}', 'destroy');
+    Route::get('/{subtasks}', 'show');
+    Route::put('/{subtasks}', 'update');
+    Route::delete('/{subtasks}', 'destroy');
 });

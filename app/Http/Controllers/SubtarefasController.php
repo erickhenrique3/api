@@ -23,7 +23,7 @@ class SubtarefasController extends Controller
         //
         $subtarefas = Subtarefas::create([
             'title' => $request->input('title'),
-            'tarefa_id' => $request->input('tarefa_id'),
+            'task_id' => $request->input('task_id'),
             'description' => $request->input('description'),
             'status' => $request->input('status')
 
@@ -36,9 +36,10 @@ class SubtarefasController extends Controller
         ]);
     }
 
-    public function show(Subtarefas $subtarefas)
+    public function show($id)
     {
-        return response()->json(($subtarefas));
+        $subtarefas = Subtarefas::findOrFail($id);
+        return response()->json($subtarefas);
     }
 
 
@@ -59,7 +60,7 @@ class SubtarefasController extends Controller
             [
                 'title' => 'required|string',
                 'description' => 'nullable|string',
-                'tarefa_id' => 'numeric',
+                'task_id' => 'numeric',
                 'status' => 'nullable|string| in:pending,completed',
 
             ],

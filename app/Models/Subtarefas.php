@@ -10,7 +10,7 @@ class Subtarefas extends Model
     use HasFactory;
     protected $fillable = [
         'title',
-        'tarefa_id',
+        'task_id',
         'description',
         'status'
 
