@@ -95,9 +95,10 @@ class TarefasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tarefas $tarefas)
+    public function destroy(Tarefas $tarefas, $id)
     {
-        $tarefas->delete();
+        // $tarefas->delete();
+        $tarefas->where('id', $id)->delete();
         return response()->json(['message' => 'Tarefa excluida com sucesso!'], 200);
     }
 }
