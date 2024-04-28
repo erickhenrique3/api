@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tarefas;
 use App\models\Subtarefas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TarefasController extends Controller
@@ -14,7 +15,7 @@ class TarefasController extends Controller
     public function index(Request $request)
     {
         //
-        return response()->json(Tarefas::with("subtarefas")->paginate($request->input('per_page') ?? 15 ));
+        return response()->json(Tarefas::with("subtarefas")->paginate($request->input('per_page') ?? 15));
     }
 
     /**
@@ -23,13 +24,24 @@ class TarefasController extends Controller
     public function create(Request $request)
     {
         //
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'due_date' => 'required|date_format:d/m/Y',
+            'status' => 'required|string|in:pending,completed'
+        ]);
+
+        $due_date = Carbon::createFromFormat('d/m/Y', $request->input('due_date'));
+
         $tarefas = Tarefas::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
-            'due_date' => $request->input('due_date'),
+            'due_date' =>  $due_date,
             'status' => $request->input('status')
 
         ]);
+
+        $tarefas->due_date = $tarefas->due_date->format('d/m/Y');
 
         return response()->json([
             'message' => 'tarefa adicionada!',
@@ -67,9 +79,12 @@ class TarefasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tarefas $tarefas)
+    public function update(Request $request, Tarefas $tarefas, $id)
     {
         //
+        $tarefas = Tarefas::findOrFail($id);
+
+
         $request->validate(
             [
                 'title' => 'required|string',
@@ -81,15 +96,17 @@ class TarefasController extends Controller
 
         );
 
+        $tarefas->fill($request->all());
+        $tarefas->save();
 
 
-
-        $tarefas->update($request->all());
+        // $tarefas->update($request->all());
+        // $tarefas->refresh();
 
         return response()->json([
             'message' => 'tarefa atualizada com sucesso',
             'tarefa' => $tarefas
-        ], );
+        ],);
     }
 
     /**

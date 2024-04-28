@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->longText('description');
-            $table->date('due_date');
+            $table->date('due_date')->format('d/m/Y');
             $table->enum('status', ['pending', 'completed']);
             $table->timestamps();
         });
