@@ -109,6 +109,22 @@ class TarefasController extends Controller
         ],);
     }
 
+    public function patch(Request $request, $id)
+    {
+        $tarefas = Tarefas::findOrFail($id);
+
+        $request->validate([
+            'due_date' => 'required|date_format:d/m/Y'
+        ]);
+        $tarefas->due_date = Carbon::createFromFormat('d/m/Y', $request->input('due_date'));
+        $tarefas->save();
+
+        return response()->json([
+            'message' => 'Due date atualizada com sucesso!',
+            'tarefa' => $tarefas
+        ], 200);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
