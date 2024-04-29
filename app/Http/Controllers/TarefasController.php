@@ -28,16 +28,18 @@ class TarefasController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'due_date' => 'required|date_format:d/m/Y',
-            'status' => 'required|string|in:pending,completed'
+            // 'status' => 'string'
+            'status' => 'nullable|string|in:pending,completed'
         ]);
 
         $due_date = Carbon::createFromFormat('d/m/Y', $request->input('due_date'));
+        $status = $request->input('status', 'pending');
 
         $tarefas = Tarefas::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'due_date' =>  $due_date,
-            'status' => $request->input('status')
+            'status' => $status
 
         ]);
 
