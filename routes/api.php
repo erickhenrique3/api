@@ -27,11 +27,12 @@ Route::prefix('tasks')->controller(TarefasController::class)->group(function () 
     Route::get('/', 'index');
     Route::get('/{tasks}', 'show');
     Route::put('/{tasks}', 'update');
-    Route::patch('/{task}', 'patch');
+    Route::patch('/{tasks}', 'patch');
+    Route::patch('/{tasks}/status', 'updateStatus');
     Route::delete('/{tasks}', 'destroy');
 });
 
-Route::prefix('subtasks')->controller(SubtarefasController::class)->group(function (){
+Route::prefix('subtasks')->controller(SubtarefasController::class)->group(function () {
     Route::post('/', 'create');
     Route::get('/', 'index');
     Route::get('/{subtasks}', 'show');

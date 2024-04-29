@@ -125,6 +125,24 @@ class TarefasController extends Controller
         ], 200);
     }
 
+
+    public function updateStatus(Request $request, $id)
+    {
+        $tarefas = Tarefas::findOrFail($id);
+
+        $request->validate([
+            'status' => 'required|string|in:pending,completed'
+        ]);
+
+        $tarefas->status = $request->input('status');
+        $tarefas->save();
+
+        return response()->json([
+            'message' => 'Status da tarefa atualizado com sucesso!',
+            'tarefa' => $tarefas
+        ], 200);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
