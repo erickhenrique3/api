@@ -111,6 +111,7 @@ class TarefasController extends Controller
         ],);
     }
 
+    
     public function patch(Request $request, $id)
     {
         $tarefas = Tarefas::findOrFail($id);

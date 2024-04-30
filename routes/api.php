@@ -27,7 +27,7 @@ Route::prefix('tasks')->controller(TarefasController::class)->group(function () 
     Route::get('/', 'index');
     Route::get('/{tasks}', 'show');
     Route::put('/{tasks}', 'update');
-    Route::patch('/{tasks}', 'patch');
+    Route::patch('/{tasks}/due_date', 'patch');
     Route::patch('/{tasks}/status', 'updateStatus');
     Route::delete('/{tasks}', 'destroy');
 });
