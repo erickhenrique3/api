@@ -15,7 +15,8 @@ class TarefasController extends Controller
     public function index(Request $request)
     {
         //
-        return response()->json(Tarefas::with("subtarefas")->paginate($request->input('per_page') ?? 15));
+        
+        return response()->json(Tarefas::with("subtarefas")->get());
     }
 
     /**
