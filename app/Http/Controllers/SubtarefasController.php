@@ -67,11 +67,7 @@ class SubtarefasController extends Controller
         );
 
 
-        // $subtarefas->title = $request->title;
-        // $subtarefas->description = $request->description;
-        // $subtarefas->task_id = $request->task_id;
-        // $subtarefas->update($request->all());
-        // $subtarefas->save();
+        
         $subtarefa = Subtarefas::findOrFail($id);
         $subtarefa->update($request->all());
 
