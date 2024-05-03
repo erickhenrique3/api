@@ -36,6 +36,6 @@ Route::prefix('subtasks')->controller(SubtarefasController::class)->group(functi
     Route::post('/', 'create');
     Route::get('/', 'index');
     Route::get('/{subtasks}', 'show');
-    Route::put('/{subtasks}', 'update');
+    Route::put('/{id}', 'update');
     Route::delete('/{subtasks}', 'destroy');
 });
