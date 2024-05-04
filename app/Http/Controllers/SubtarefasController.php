@@ -14,7 +14,7 @@ class SubtarefasController extends Controller
     public function index(Request $request)
     {
         //
-        return response()->json(Subtarefas::paginate($request->input('per_page') ?? 15));
+        return response()->json(Subtarefas::get());
     }
 
     public function create(Request $request)
