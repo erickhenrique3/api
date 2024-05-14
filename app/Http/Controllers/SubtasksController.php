@@ -30,7 +30,7 @@ class SubtasksController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'subtarefa adicionada!',
+            'message' => 'subtask adicionada!',
             'subtarefas' => $subtarefas
 
         ]);
@@ -66,7 +66,7 @@ class SubtasksController extends Controller
         $subtarefa->update($request->all());
 
         return response()->json([
-            'message' => 'subtarefa atualizada com sucesso',
+            'message' => 'subtask atualizada com sucesso',
             'subtarefa' => $subtarefa
         ],);
     }
@@ -79,6 +79,6 @@ class SubtasksController extends Controller
         //
         $subtarefas = Subtasks::findOrFail($id);
         $subtarefas->delete();
-        return response()->json(['message' => 'Subtarefa excluida com sucesso!'], 200);
+        return response()->json(['message' => 'Subtask excluida com sucesso!'], 200);
     }
 }

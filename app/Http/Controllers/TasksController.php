@@ -29,7 +29,7 @@ class TasksController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'due_date' => 'required|date_format:d/m/Y',
-            // 'status' => 'string'
+           
             'status' => 'nullable|string|in:pending,completed'
         ]);
 
@@ -47,7 +47,7 @@ class TasksController extends Controller
         $tarefas->due_date = $tarefas->due_date->format('d/m/Y');
 
         return response()->json([
-            'message' => 'tarefa adicionada!',
+            'message' => 'task adicionada!',
             'tarefa' => $tarefas
 
         ]);
@@ -60,7 +60,7 @@ class TasksController extends Controller
     public function show($id)
     {
         $tarefas = Tasks::findOrFail($id);
-        // $tarefas =Tarefas::with('subtarefas')->find($tarefas);
+       
         return response()->json($tarefas);
     }
 
@@ -93,7 +93,7 @@ class TasksController extends Controller
         
 
         return response()->json([
-            'message' => 'tarefa atualizada com sucesso',
+            'message' => 'task atualizada com sucesso',
             'tarefa' => $tarefas
         ],);
     }
@@ -138,8 +138,8 @@ class TasksController extends Controller
      */
     public function destroy(Tasks $tarefas, $id)
     {
-        // $tarefas->delete();
+        
         $tarefas->where('id', $id)->delete();
-        return response()->json(['message' => 'Tarefa excluida com sucesso!'], 200);
+        return response()->json(['message' => 'Task excluida com sucesso!'], 200);
     }
 }
