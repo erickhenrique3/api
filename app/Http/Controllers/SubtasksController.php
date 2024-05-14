@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Subtarefas;
-use App\Models\Tarefas;
+use App\Models\Subtasks;
+use App\Models\Tasks;
 use Illuminate\Http\Request;
 
-class SubtarefasController extends Controller
+class SubtasksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +14,14 @@ class SubtarefasController extends Controller
     public function index(Request $request)
     {
         //
-        return response()->json(Subtarefas::get());
+        return response()->json(Subtasks::get());
     }
 
     public function create(Request $request)
     {
         $status = $request->input('status', 'pending');
 
-        $subtarefas = Subtarefas::create([
+        $subtarefas = Subtasks::create([
             'title' => $request->input('title'),
             'task_id' => $request->input('task_id'),
             'description' => $request->input('description'),
@@ -38,23 +38,17 @@ class SubtarefasController extends Controller
 
     public function show($id)
     {
-        $subtarefas = Subtarefas::findOrFail($id);
+        $subtarefas = Subtasks::findOrFail($id);
         return response()->json($subtarefas);
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Subtarefas $subtarefas)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subtarefas $subtarefas, $id)
+    public function update(Request $request, Subtasks $subtarefas, $id)
     {
         $request->validate(
             [
@@ -68,7 +62,7 @@ class SubtarefasController extends Controller
 
 
         
-        $subtarefa = Subtarefas::findOrFail($id);
+        $subtarefa = Subtasks::findOrFail($id);
         $subtarefa->update($request->all());
 
         return response()->json([
@@ -80,10 +74,10 @@ class SubtarefasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subtarefas $subtarefas, $id)
+    public function destroy(Subtasks $subtarefas, $id)
     {
         //
-        $subtarefas = Subtarefas::findOrFail($id);
+        $subtarefas = Subtasks::findOrFail($id);
         $subtarefas->delete();
         return response()->json(['message' => 'Subtarefa excluida com sucesso!'], 200);
     }

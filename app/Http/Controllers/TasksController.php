@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tarefas;
-use App\models\Subtarefas;
+use App\Models\Tasks;
+use App\models\Subtasks;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class TarefasController extends Controller
+class TasksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class TarefasController extends Controller
     {
         //
         
-        return response()->json(Tarefas::with("subtarefas")->get());
+        return response()->json(Tasks::with("subtasks")->get());
     }
 
     /**
@@ -36,7 +36,7 @@ class TarefasController extends Controller
         $due_date = Carbon::createFromFormat('d/m/Y', $request->input('due_date'));
         $status = $request->input('status', 'pending');
 
-        $tarefas = Tarefas::create([
+        $tarefas = Tasks::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'due_date' =>  $due_date,
@@ -53,39 +53,26 @@ class TarefasController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
+    
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
-        $tarefas = Tarefas::findOrFail($id);
+        $tarefas = Tasks::findOrFail($id);
         // $tarefas =Tarefas::with('subtarefas')->find($tarefas);
         return response()->json($tarefas);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tarefas $tarefas)
-    {
-        //
-    }
+   
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tarefas $tarefas, $id)
+    public function update(Request $request, Tasks $tarefas, $id)
     {
         //
-        $tarefas = Tarefas::findOrFail($id);
+        $tarefas = Tasks::findOrFail($id);
 
 
         $request->validate(
@@ -103,8 +90,7 @@ class TarefasController extends Controller
         $tarefas->save();
 
 
-        // $tarefas->update($request->all());
-        // $tarefas->refresh();
+        
 
         return response()->json([
             'message' => 'tarefa atualizada com sucesso',
@@ -115,7 +101,7 @@ class TarefasController extends Controller
     
     public function patch(Request $request, $id)
     {
-        $tarefas = Tarefas::findOrFail($id);
+        $tarefas = Tasks::findOrFail($id);
 
         $request->validate([
             'due_date' => 'required|date_format:d/m/Y'
@@ -132,7 +118,7 @@ class TarefasController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        $tarefas = Tarefas::findOrFail($id);
+        $tarefas = Tasks::findOrFail($id);
 
         $request->validate([
             'status' => 'required|string|in:pending,completed'
@@ -150,7 +136,7 @@ class TarefasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tarefas $tarefas, $id)
+    public function destroy(Tasks $tarefas, $id)
     {
         // $tarefas->delete();
         $tarefas->where('id', $id)->delete();

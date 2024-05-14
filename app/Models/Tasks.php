@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Tarefas extends Model
+class Tasks extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -18,9 +18,9 @@ class Tarefas extends Model
 
     ];
 
-    public function subtarefas()
+    public function subtasks()
     {
-        return $this->hasMany(Subtarefas::class, 'task_id');
+        return $this->hasMany(Subtasks::class, 'task_id');
         
     }
 

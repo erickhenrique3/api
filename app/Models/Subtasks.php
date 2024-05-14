@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subtarefas extends Model
+class Subtasks extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -18,8 +18,8 @@ class Subtarefas extends Model
 
 
 
-    public function tarefas()
+    public function tasks()
     {
-        return $this->belongsTo(Tarefas::class);
+        return $this->belongsTo(Tasks::class);
     }
 }

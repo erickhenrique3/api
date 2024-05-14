@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\MotoController;
-use App\Http\Controllers\SubtarefasController;
-use App\Http\Controllers\TarefasController;
+use App\Http\Controllers\SubtasksController;
+use App\Http\Controllers\TasksController;
 use App\Models\Subtarefas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('tasks')->controller(TarefasController::class)->group(function () {
+Route::prefix('tasks')->controller(TasksController::class)->group(function () {
     Route::post('/', 'create');
     Route::get('/', 'index');
     Route::get('/{tasks}', 'show');
@@ -32,7 +32,7 @@ Route::prefix('tasks')->controller(TarefasController::class)->group(function () 
     Route::delete('/{tasks}', 'destroy');
 });
 
-Route::prefix('subtasks')->controller(SubtarefasController::class)->group(function () {
+Route::prefix('subtasks')->controller(SubtasksController::class)->group(function () {
     Route::post('/', 'create');
     Route::get('/', 'index');
     Route::get('/{subtasks}', 'show');
