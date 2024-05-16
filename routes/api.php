@@ -37,5 +37,6 @@ Route::prefix('subtasks')->controller(SubtasksController::class)->group(function
     Route::get('/', 'index');
     Route::get('/{subtasks}', 'show');
     Route::put('/{id}', 'update');
+    Route::patch('/{id}', 'updateStatus');
     Route::delete('/{subtasks}', 'destroy');
 });

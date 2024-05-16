@@ -61,7 +61,7 @@ class SubtasksController extends Controller
         );
 
 
-        
+
         $subtarefa = Subtasks::findOrFail($id);
         $subtarefa->update($request->all());
 
@@ -69,6 +69,22 @@ class SubtasksController extends Controller
             'message' => 'subtask atualizada com sucesso',
             'subtarefa' => $subtarefa
         ],);
+    }
+
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string|in:pending,completed',
+        ]);
+
+        $subtask = Subtasks::findOrFail($id);
+        $subtask->update(['status' => $request->status]);
+
+        return response()->json([
+            'message' => 'Status da subtarefa atualizado com sucesso',
+            'subtask' => $subtask,
+        ]);
     }
 
     /**
