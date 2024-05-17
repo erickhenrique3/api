@@ -15,7 +15,7 @@ class TasksController extends Controller
     public function index(Request $request)
     {
         //
-        
+
         return response()->json(Tasks::with("subtasks")->get());
     }
 
@@ -29,7 +29,7 @@ class TasksController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'due_date' => 'required|date_format:d/m/Y',
-           
+
             'status' => 'nullable|string|in:pending,completed'
         ]);
 
@@ -53,18 +53,18 @@ class TasksController extends Controller
         ]);
     }
 
-    
+
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
         $tarefas = Tasks::findOrFail($id);
-       
+
         return response()->json($tarefas);
     }
 
-   
+
 
     /**
      * Update the specified resource in storage.
@@ -90,7 +90,7 @@ class TasksController extends Controller
         $tarefas->save();
 
 
-        
+
 
         return response()->json([
             'message' => 'task atualizada com sucesso',
@@ -98,7 +98,7 @@ class TasksController extends Controller
         ],);
     }
 
-    
+
     public function patch(Request $request, $id)
     {
         $tarefas = Tasks::findOrFail($id);
@@ -118,28 +118,33 @@ class TasksController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        $tarefas = Tasks::findOrFail($id);
 
         $request->validate([
             'status' => 'required|string|in:pending,completed'
         ]);
 
-        $tarefas->status = $request->input('status');
-        $tarefas->save();
+        $task = Tasks::findOrFail($id);
+
+        $task->status = $request->input('status');
+        $task->save();
+
+        if ($task->status === 'completed') {
+            $task->subtasks()->update(['status' => 'completed']);
+        }
 
         return response()->json([
-            'message' => 'Status da tarefa atualizado com sucesso!',
-            'tarefa' => $tarefas
+            'message' => 'Status da tarefa e suas subtarefas atualizados com sucesso!',
+            'task' => $task
         ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tasks $tarefas, $id)
+    public function destroy(Tasks $task, $id)
     {
-        
-        $tarefas->where('id', $id)->delete();
+
+        $task->where('id', $id)->delete();
         return response()->json(['message' => 'Task excluida com sucesso!'], 200);
     }
 }
