@@ -21,7 +21,7 @@ class SubtasksController extends Controller
     {
         $status = $request->input('status', 'pending');
 
-        $subtarefas = Subtasks::create([
+        $subtask = Subtasks::create([
             'title' => $request->input('title'),
             'task_id' => $request->input('task_id'),
             'description' => $request->input('description'),
@@ -31,15 +31,15 @@ class SubtasksController extends Controller
 
         return response()->json([
             'message' => 'subtask adicionada!',
-            'subtarefas' => $subtarefas
+            'subtasks' => $subtask
 
         ]);
     }
 
     public function show($id)
     {
-        $subtarefas = Subtasks::findOrFail($id);
-        return response()->json($subtarefas);
+        $subtask = Subtasks::findOrFail($id);
+        return response()->json($subtask);
     }
 
 
@@ -48,7 +48,7 @@ class SubtasksController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subtasks $subtarefas, $id)
+    public function update(Request $request, Subtasks $subtask, $id)
     {
         $request->validate(
             [
@@ -62,12 +62,12 @@ class SubtasksController extends Controller
 
 
 
-        $subtarefa = Subtasks::findOrFail($id);
-        $subtarefa->update($request->all());
+        $subtask = Subtasks::findOrFail($id);
+        $subtask->update($request->all());
 
         return response()->json([
             'message' => 'subtask atualizada com sucesso',
-            'subtarefa' => $subtarefa
+            'subtarefa' => $subtask
         ],);
     }
 
@@ -90,11 +90,11 @@ class SubtasksController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subtasks $subtarefas, $id)
+    public function destroy(Subtasks $subtask, $id)
     {
         //
-        $subtarefas = Subtasks::findOrFail($id);
-        $subtarefas->delete();
+        $subtask = Subtasks::findOrFail($id);
+        $subtask->delete();
         return response()->json(['message' => 'Subtask excluida com sucesso!'], 200);
     }
 }

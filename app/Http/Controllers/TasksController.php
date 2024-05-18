@@ -36,7 +36,7 @@ class TasksController extends Controller
         $due_date = Carbon::createFromFormat('d/m/Y', $request->input('due_date'));
         $status = $request->input('status', 'pending');
 
-        $tarefas = Tasks::create([
+        $tasks = Tasks::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'due_date' =>  $due_date,
@@ -44,11 +44,11 @@ class TasksController extends Controller
 
         ]);
 
-        $tarefas->due_date = $tarefas->due_date->format('d/m/Y');
+        $tasks->due_date = $tasks->due_date->format('d/m/Y');
 
         return response()->json([
             'message' => 'task adicionada!',
-            'tarefa' => $tarefas
+            'tarefa' => $tasks
 
         ]);
     }
@@ -59,9 +59,9 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $tarefas = Tasks::findOrFail($id);
+        $tasks = Tasks::findOrFail($id);
 
-        return response()->json($tarefas);
+        return response()->json($tasks);
     }
 
 
