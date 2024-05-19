@@ -30,6 +30,8 @@ Route::prefix('tasks')->controller(TasksController::class)->group(function () {
     Route::patch('/{tasks}/due_date', 'patch');
     Route::patch('/{tasks}/status', 'updateStatus');
     Route::delete('/{tasks}', 'destroy');
+    Route::get('/filter/today', 'filterToday'); 
+    Route::get('/filter/overdue', 'filterOverdue');
 });
 
 Route::prefix('subtasks')->controller(SubtasksController::class)->group(function () {

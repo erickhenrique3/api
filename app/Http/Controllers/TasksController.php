@@ -6,6 +6,8 @@ use App\Models\Tasks;
 use App\models\Subtasks;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TasksController extends Controller
 {
@@ -146,5 +148,36 @@ class TasksController extends Controller
 
         $task->where('id', $id)->delete();
         return response()->json(['message' => 'Task excluida com sucesso!'], 200);
+    }
+
+    public function filterToday(Tasks $task)
+    {
+        $tasks = DB::select('SELECT * FROM tasks WHERE DATE(due_date) = CURDATE()');
+
+       
+        $tasks = collect($tasks)->map(function ($task) {
+            return (object) $task; 
+        });
+
+      
+        Log::info('Query filterToday: ', $tasks->toArray());
+
+        return response()->json($tasks);
+    }
+
+    public function filterOverdue(Tasks $task)
+    {
+       
+        $tasks = DB::select('SELECT * FROM tasks WHERE DATE(due_date) < CURDATE()');
+
+       
+        $tasks = collect($tasks)->map(function ($task) {
+            return (object) $task; 
+        });
+
+        
+        Log::info('Query filterOverdue: ', $tasks->toArray());
+
+        return response()->json($tasks);
     }
 }
