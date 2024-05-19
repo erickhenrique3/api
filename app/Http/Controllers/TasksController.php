@@ -152,31 +152,21 @@ class TasksController extends Controller
 
     public function filterToday(Tasks $task)
     {
-        $tasks = DB::select('SELECT * FROM tasks WHERE DATE(due_date) = CURDATE()');
 
-       
-        $tasks = collect($tasks)->map(function ($task) {
-            return (object) $task; 
-        });
+        $tasks = Tasks::with("subtasks")->whereDate('due_date', Carbon::today())->get();
 
-      
-        Log::info('Query filterToday: ', $tasks->toArray());
-
+         Log::info('Query filterToday: ', $tasks->toArray());
+        
         return response()->json($tasks);
     }
 
     public function filterOverdue(Tasks $task)
     {
        
-        $tasks = DB::select('SELECT * FROM tasks WHERE DATE(due_date) < CURDATE()');
+        $tasks = Tasks::with("subtasks")->whereDate('due_date', '<', Carbon::today())->get();
 
-       
-        $tasks = collect($tasks)->map(function ($task) {
-            return (object) $task; 
-        });
-
-        
         Log::info('Query filterOverdue: ', $tasks->toArray());
+    
 
         return response()->json($tasks);
     }
