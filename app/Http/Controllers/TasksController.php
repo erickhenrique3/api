@@ -71,10 +71,10 @@ class TasksController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tasks $tasks, $id)
+    public function update(Request $request, Tasks $task, $id)
     {
         //
-        $tasks = Tasks::findOrFail($id);
+        $task = Tasks::findOrFail($id);
 
 
         $request->validate(
@@ -88,15 +88,15 @@ class TasksController extends Controller
 
         );
 
-        $tasks->fill($request->all());
-        $tasks->save();
+        $task->fill($request->all());
+        $task->save();
 
 
 
 
         return response()->json([
             'message' => 'task atualizada com sucesso',
-            'tarefa' => $tasks
+            'tarefa' => $task
         ],);
     }
 
