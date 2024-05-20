@@ -71,10 +71,10 @@ class TasksController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tasks $tarefas, $id)
+    public function update(Request $request, Tasks $tasks, $id)
     {
         //
-        $tarefas = Tasks::findOrFail($id);
+        $tasks = Tasks::findOrFail($id);
 
 
         $request->validate(
@@ -88,32 +88,32 @@ class TasksController extends Controller
 
         );
 
-        $tarefas->fill($request->all());
-        $tarefas->save();
+        $tasks->fill($request->all());
+        $tasks->save();
 
 
 
 
         return response()->json([
             'message' => 'task atualizada com sucesso',
-            'tarefa' => $tarefas
+            'tarefa' => $tasks
         ],);
     }
 
 
     public function patch(Request $request, $id)
     {
-        $tarefas = Tasks::findOrFail($id);
+        $tasks = Tasks::findOrFail($id);
 
         $request->validate([
             'due_date' => 'required|date_format:d/m/Y'
         ]);
-        $tarefas->due_date = Carbon::createFromFormat('d/m/Y', $request->input('due_date'));
-        $tarefas->save();
+        $tasks->due_date = Carbon::createFromFormat('d/m/Y', $request->input('due_date'));
+        $tasks->save();
 
         return response()->json([
             'message' => 'Due date atualizada com sucesso!',
-            'tarefa' => $tarefas
+            'tarefa' => $tasks
         ], 200);
     }
 
